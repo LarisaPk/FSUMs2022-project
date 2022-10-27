@@ -1,10 +1,14 @@
 import '../styles/App.scss';
-import TopBar from './TopBar'; 
+import TopBar from './TopBar';
+import Navbar from './Navbar';
 
 function App() {
   return (
-    <div className="App">
-      <TopBar/>
+    <div className = "App">
+      <div className = "content">
+          <TopBar/>
+      </div>
+      <Navbar/>
     </div>
   );
 }

@@ -1,8 +1,8 @@
-import '../styles/navigation.scss'
+import '../styles/topbar.scss'
 
 function TopBar() {
     return (
-        <div className = "navigation">
+        <div className = "topbar">
             <div className = "container">
                 <p>Memegram</p>
             </div>

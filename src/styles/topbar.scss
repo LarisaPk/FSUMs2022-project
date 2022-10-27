@@ -1,18 +1,20 @@
 $mainColor: #3EAFBE;
 
-.navigation {
+.topbar {
+  flex: 1 0 auto;
   background-color: $mainColor;
-  height: 5rem;
+  height: 5em;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 0.5rem;
+  border-radius: 0.5em;
+  width: 100%;
   
   .container {
     margin: 0;
     padding:0;
     p {
-        font-size: 2rem;
+        font-size: 2em;
         margin: 0;
     }
   }
