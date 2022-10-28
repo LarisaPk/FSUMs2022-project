@@ -1,0 +1,9 @@
+POST http://localhost:3001/api/posts
+Content-Type: application/json
+
+{
+    "id": 5,
+    "top_text": "5 Text on the top",
+    "bottom_text": "5 Text on the bottom",
+    "image": "https://api.memegen.link/images/ams.png"
+}
