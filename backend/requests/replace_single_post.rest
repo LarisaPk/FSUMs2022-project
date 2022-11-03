@@ -1,0 +1,8 @@
+PUT http://localhost:3001/api/posts/1
+Content-Type: application/json
+
+{
+    "top_text": "new text",
+    "bottom_text": "new text",
+    "image": "https://api.memegen.link/images/ams.png"
+}

@@ -24,39 +24,75 @@ let posts = [
   },
 ]
 
-// get a single post
+const generateId = () => {
+  const maxId = posts.length > 0
+    ? Math.max(...posts.map(p => p.id))
+    : 0
+  return maxId + 1
+}
+
+// Get a single post
 app.get('/api/posts/:id', (request, response) => {
   const id = Number(request.params.id)
   const post = posts.find(post => post.id === id) 
   
   if (post) {
-    response.json(post) 
+    response.status(200).json(post) 
   }
   else {
     response.status(404).end()
   }
 })
 
-// get all posts
+// Get all posts
 app.get('/api/posts', (request, response) => {
-    response.json(posts) 
+    response.status(200).json(posts) 
 })
 
-// delete a single post
+// Delete a single post
 app.delete('/api/posts/:id', (request, response) => {
   const id = Number(request.params.id)
   posts = posts.filter(post => post.id !== id)
   response.status(204).end()
 })
 
-// add a single post
+// Add a single post
 app.post('/api/posts', (request, response) => {
-  const post = request.body
-  console.log(typeof post)
-  response.json(post)
+  const body = request.body
+
+  if (!body) {
+    return response.status(400).json({ 
+      error: 'content is missing' 
+    })
+  }
+
+  const post = {
+    id: generateId(),
+    ...request.body
+  }
+
+  posts.push(post)
+  return response.status(201).json(post);
 })
 
-  
+// Replace the entire post with the request data
+app.put('/api/posts/:id',(request, response) => {
+	let tempId = Number(request.params.id);
+	
+  let post = {
+    id:tempId,
+		...request.body
+	}
+
+	for(p of posts) {
+		if(p.id === tempId) {
+			posts.splice(p,1,post);
+			return response.status(200).json({message:"Success"});
+		}
+	}
+	return response.status(404).json({message:"Not found"});
+})
+
 const PORT = process.env.PORT || 3001
 
 app.listen(PORT, () => {
