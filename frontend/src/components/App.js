@@ -1,13 +1,15 @@
 import '../styles/App.scss';
 import TopBar from './TopBar';
 import Navbar from './Navbar';
-import LoginPage from './pages/LoginPage';
-import AddNewPage from './pages/AddNewPage';
-import MyMemesPage from './pages/MyMemesPage';
-import MyAccountPage from './pages/MyAccountPage';
+import LoginPage from '../pages/LoginPage';
+import AddNewPage from '../pages/AddNewPage';
+import MyMemesPage from '../pages/MyMemesPage';
+import MyAccountPage from '../pages/MyAccountPage';
 import {Routes,Route,Navigate} from 'react-router-dom';
 
 function App() {
+
+  
 
   let routes = <Routes>
                   <Route exact path="/" element={<LoginPage/>}/>

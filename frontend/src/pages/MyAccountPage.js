@@ -1,5 +1,3 @@
-import '../../styles/MyAccountPage.scss'
-
 function MyAccountPage() {
     return (
         <div className = "MyAccountPage">

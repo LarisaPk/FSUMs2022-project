@@ -1,4 +1,4 @@
-import '../styles/topbar.scss'
+import '../styles/Topbar.scss'
 
 function TopBar() {
     return (

@@ -3,6 +3,12 @@ const app = express()
 
 app.use(express.json())
 
+// CORS fix (temporary set to all)
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 let posts = [
   {
     id: 1,

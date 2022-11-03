@@ -1,5 +1,3 @@
-import '../../styles/loginPage.scss'
-
 function AddNewPage() {
     return (
         <div className = "addNewPage">
