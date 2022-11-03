@@ -77,20 +77,20 @@ app.post('/api/posts', (request, response) => {
 
 // Replace the entire post with the request data
 app.put('/api/posts/:id',(request, response) => {
-	let tempId = Number(request.params.id);
-	
+  let tempId = Number(request.params.id);
+  
   let post = {
     id:tempId,
-		...request.body
-	}
-
-	for(p of posts) {
-		if(p.id === tempId) {
-			posts.splice(p,1,post);
-			return response.status(200).json({message:"Success"});
-		}
-	}
-	return response.status(404).json({message:"Not found"});
+    ...request.body
+  }
+  
+  for(p of posts) {
+    if(p.id === tempId) {
+      posts.splice(p,1,post);
+      return response.status(200).json({message:"Success"});
+    }
+  }
+  return response.status(404).json({message:"Not found"})
 })
 
 const PORT = process.env.PORT || 3001
