@@ -6,6 +6,7 @@ app.use(express.json())
 // CORS fix (temporary set to all)
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
+  res.header( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" );
   next();
 });
 
@@ -59,7 +60,7 @@ app.get('/api/posts', (request, response) => {
 app.delete('/api/posts/:id', (request, response) => {
   const id = Number(request.params.id)
   posts = posts.filter(post => post.id !== id)
-  response.status(204).end()
+  response.status(204).end
 })
 
 // Add a single post
