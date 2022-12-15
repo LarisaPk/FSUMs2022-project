@@ -1,13 +1,13 @@
-import '../styles/Topbar.scss'
+import "../styles/Topbar.scss";
 
 function TopBar() {
-    return (
-        <div className = "topbar">
-            <div className = "container">
-                <p>Memegram</p>
-            </div>
-        </div>
-    );
+  return (
+    <div className="topbar">
+      <div className="container">
+        <p>Memegram</p>
+      </div>
+    </div>
+  );
 }
 
 export default TopBar;
