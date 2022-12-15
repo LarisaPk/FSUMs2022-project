@@ -1,12 +1,15 @@
-const express = require('express')
-const app = express()
+const express = require("express");
+const app = express();
 
-app.use(express.json())
+app.use(express.json());
 
 // CORS fix (temporary set to all)
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" );
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Methods",
+    "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+  );
   next();
 });
 
@@ -29,79 +32,76 @@ let posts = [
     bottom_text: "3 Text on the bottom",
     image: "https://api.memegen.link/images/ants.png",
   },
-]
+];
 
 const generateId = () => {
-  const maxId = posts.length > 0
-    ? Math.max(...posts.map(p => p.id))
-    : 0
-  return maxId + 1
-}
+  const maxId = posts.length > 0 ? Math.max(...posts.map((p) => p.id)) : 0;
+  return maxId + 1;
+};
 
 // Get a single post
-app.get('/api/posts/:id', (request, response) => {
-  const id = Number(request.params.id)
-  const post = posts.find(post => post.id === id) 
-  
+app.get("/api/posts/:id", (request, response) => {
+  const id = Number(request.params.id);
+  const post = posts.find((post) => post.id === id);
+
   if (post) {
-    response.status(200).json(post) 
+    response.status(200).json(post);
+  } else {
+    response.status(404).end();
   }
-  else {
-    response.status(404).end()
-  }
-})
+});
 
 // Get all posts
-app.get('/api/posts', (request, response) => {
-    response.status(200).json(posts) 
-})
+app.get("/api/posts", (request, response) => {
+  response.status(200).json(posts);
+});
 
 // Delete a single post
-app.delete('/api/posts/:id', (request, response) => {
-  const id = Number(request.params.id)
-  posts = posts.filter(post => post.id !== id)
-  response.status(204).end
-})
+app.delete("/api/posts/:id", (request, response) => {
+  const id = Number(request.params.id);
+  posts = posts.filter((post) => post.id !== id);
+  response.status(204).end;
+});
 
 // Add a single post
-app.post('/api/posts', (request, response) => {
-  const body = request.body
+app.post("/api/posts", (request, response) => {
+  const body = request.body;
 
   if (!body) {
-    return response.status(400).json({ 
-      error: 'content is missing' 
-    })
+    return response.status(400).json({
+      error: "content is missing",
+    });
   }
 
   const post = {
     id: generateId(),
-    ...request.body
-  }
+    ...request.body,
+  };
 
-  posts.push(post)
+  posts.push(post);
   return response.status(201).json(post);
-})
+});
 
 // Replace the entire post with the request data
-app.put('/api/posts/:id',(request, response) => {
+app.put("/api/posts/:id", (request, response) => {
   let tempId = Number(request.params.id);
-  
+
   let post = {
-    id:tempId,
-    ...request.body
-  }
-  
-  for(p of posts) {
-    if(p.id === tempId) {
-      posts.splice(p,1,post);
-      return response.status(200).json({message:"Success"});
+    id: tempId,
+    ...request.body,
+  };
+
+  for (p of posts) {
+    if (p.id === tempId) {
+      posts.splice(p, 1, post);
+      return response.status(200).json({ message: "Success" });
     }
   }
-  return response.status(404).json({message:"Not found"})
-})
+  return response.status(404).json({ message: "Not found" });
+});
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-})
+  console.log(`Server running on port ${PORT}`);
+});
